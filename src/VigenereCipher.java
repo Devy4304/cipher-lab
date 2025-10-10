@@ -8,7 +8,7 @@ public class VigenereCipher {
      * @param keepUppercase if Uppercase letters should remain Uppercase
      * @return the encrypted version of the inputted text
      */
-    public static String encryptVigenere(String original, String key, boolean keepUppercase) {
+    public static String encryptVigenere(String original, String key, boolean keepUppercase, boolean decrypt) {
         // check if inputs are valid
         if (original.isEmpty() || key.isEmpty()) return "Invalid String or Key";
 
@@ -26,19 +26,25 @@ public class VigenereCipher {
 
         // for every letter in the original text run the code
         for (char letter : originalArray) {
-            // detects if the character is a letter
+            // detects if the character is a letter using a regex expression
             if (String.valueOf(letter).matches("^[A-Za-z]$")) {
                 // find where that letter is in the alphabet
                 letterIndex = getIndexInAlphabet(letter);
-                // add an offset based on the key at keyIndex
-                letterIndex += getIndexInAlphabet(keyArray[keyIndex]);
-
+                if (!decrypt) {
+                    // add an offset based on the key at keyIndex
+                    letterIndex += getIndexInAlphabet(keyArray[keyIndex]);
+                } else {
+                    // remove an offset based on the key at keyIndex, if it is set to decryption mode
+                    letterIndex -= getIndexInAlphabet(keyArray[keyIndex]);
+                    // keep it in range, very important
+                    if (letterIndex < 0) letterIndex += 26;
+                }
                 // find that character
                 char character = alphabet[letterIndex % alphabet.length];
                 // add it to the output and capitalize it if keepUppercase, AND it is supposed to be uppercase
                 out.append((Character.isLowerCase(letter) && keepUppercase) ? character : Character.toUpperCase(character));
 
-                // only increment keyIndex if the letter is a letter
+                // only increment keyIndex if the character is a letter, so numbers, special characters and spaces do not advance the keys index
                 keyIndex++;
             } else {
                 // the character is not a letter, add it as is.
@@ -62,7 +68,7 @@ public class VigenereCipher {
     private static int getIndexInAlphabet(char letter) {
         // repeat over the alphabet
         for (int i = 0; i < alphabet.length; i++) {
-            // check if out letter (in lowercase) is equal to the letter from the alphabet
+            // check if letter (in lowercase) is equal to the letter from the alphabet
             if (alphabet[i] == (Character.toLowerCase(letter))) {
                 // if so, return the index of that letter
                 return i;
