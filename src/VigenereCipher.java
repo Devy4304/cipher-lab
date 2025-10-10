@@ -35,7 +35,7 @@ public class VigenereCipher {
 
                 // find that character
                 char character = alphabet[letterIndex % alphabet.length];
-                // add it to the output, and capitalize it if keepUppercase AND it is supposed to be uppercase
+                // add it to the output and capitalize it if keepUppercase, AND it is supposed to be uppercase
                 out.append((Character.isLowerCase(letter) && keepUppercase) ? character : Character.toUpperCase(character));
 
                 // only increment keyIndex if the letter is a letter
