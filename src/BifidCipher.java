@@ -5,7 +5,7 @@ public class BifidCipher {
         String square = generatePolybiusSquare(key);
         String text = original.toLowerCase().replace('j', 'i').replaceAll("[^a-z]", "");
 
-        int[] coordinates = new int[text.length() * 2]; // first rows, then cols (0-based)
+        int[] coordinates = new int[text.length() * 2];
         for (int i = 0; i < text.length(); i++) {
             char letter = text.charAt(i);
             int index = square.indexOf(letter);
@@ -19,7 +19,7 @@ public class BifidCipher {
         for (int i = 0; i < text.length() * 2 - 1; i += 2) {
             int y = coordinates[i];
             int x = coordinates[i + 1];
-            int idx = y * 5 + x; // 0-based index into square
+            int idx = y * 5 + x;
             output.append(square.charAt(idx));
         }
         return output.toString();
