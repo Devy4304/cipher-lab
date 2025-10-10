@@ -44,7 +44,7 @@ public class VigenereCipher {
                 // add it to the output and capitalize it if keepUppercase, AND it is supposed to be uppercase
                 out.append((Character.isLowerCase(letter) && keepUppercase) ? character : Character.toUpperCase(character));
 
-                // only increment keyIndex if the character is a letter, so numbers, special characters and spaces do not advance the keys index
+                // only increment keyIndex if the character is a letter, so numbers, special characters and spaces do not advance the keyIndex
                 keyIndex++;
             } else {
                 // the character is not a letter, add it as is.
