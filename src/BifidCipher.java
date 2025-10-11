@@ -4,10 +4,10 @@ public class BifidCipher {
     public static String encryptBifid(String original, String key) {
         // create our polybius square using the method
         String square = generatePolybiusSquare(key);
-        // make sure or text is lowercase, replace 'j' with 'i', and remove special characters, as this cipher does not support them
+        // make sure the text is lowercase, replace 'j' with 'i', and remove special characters, as this cipher does not support them
         String text = original.toLowerCase().replace('j', 'i').replaceAll("[^a-z]", "");
 
-        // create out coordinate array
+        // create coordinate array
         int[] coordinates = new int[text.length() * 2];
         // iterate through every letter in the text
         for (int i = 0; i < text.length(); i++) {
