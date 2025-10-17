@@ -62,7 +62,7 @@ public class BifidCipher {
     }
 
     private static String generatePolybiusSquare(String key) {
-        // remove duplicates from the square, by concatenating the key then the alphabet
+        // remove duplicates from the square by concatenating the key then the alphabet
         String square = removeDuplicates(key + stringAlphabet);
         if (square.length() > 25) square = square.substring(0, 25);
         return square;
